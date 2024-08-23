@@ -139,7 +139,7 @@ async def registro(ctx, *, nick):
             return
 
     # Envía mensaje inicial de espera
-    mensaje_espera = await ctx.send("Aguarda un instante estoy procesando la información de registro. Luego esperá que te demos el acceso y rol")
+    mensaje_espera = await ctx.send("Aguarda un instante estoy procesando la información de registro. Luego esperá que te demos el acceso y rol. (Puede demorar hasta 1 minuto.)")
 
     gremio, info_jugador, player_details = buscar_jugador(nick)
     if not gremio:
@@ -168,7 +168,7 @@ async def registro(ctx, *, nick):
             enviar_datos_webhook(player_details, ctx.author.name, fecha_registro)
             
         except discord.Forbidden:
-            await mensaje_espera.edit(content="No tengo permisos para cambiar el apodo. Verifica los permisos del bot.")
+            await mensaje_espera.edit(content="[Permisos].Si previamente hiciste un registro, hacenos llegar por privado que te demos acceso nuevo al registro.")
         except discord.HTTPException as e:
             await mensaje_espera.edit(content=f"Error al cambiar el apodo: {e}")
     else:
